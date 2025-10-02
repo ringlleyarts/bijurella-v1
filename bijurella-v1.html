@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bijurella | Haute Joaillerie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --rose-gold: #B76E79;
+            --charcoal: #1a1a1a;
+            --soft-white: #FAF9F6;
+            --light-gray: #E8E8E8;
+            --medium-gray: #666666;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            color: var(--charcoal);
+            background: #000;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Cursor Customizado */
+        body {
+            cursor: none;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Partículas de Fundo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        /* Header Premium */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .promo-bar {
+            background: linear-gradient(90deg, var(--gold), var(--rose-gold), var(--gold));
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+            color: #000;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 300;
+            background: linear-gradient(135deg, var(--gold), var(--rose-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 6px;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            letter-spacing: 8px;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--soft-white);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.3s;
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: all 0.4s;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--gold);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-icons button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s;
+        }
+
+        .nav-icons button:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-icons button:hover {
+            color: #000;
+            border-color: var(--gold);
+        }
+
+        /* Hero 3D */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1600') center/cover;
+            transform-style: preserve-3d;
+            animation: heroZoom 20s infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            letter-spacing: 8px;
+            font-weight: 300;
+            background: linear-gradient(135deg, #fff, var(--gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 5s infinite;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            letter-spacing: 3px;
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+            opacity: 0.9;
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.9; }
+        }
+
+        .cta-button {
+            background: transparent;
+            color: var(--gold);
+            padding: 18px 60px;
+            border: 2px solid var(--gold);
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            overflow: hidden;
+            font-weight: 300;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Floating Diamond */
+        .floating-diamond {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            right: 10%;
+            animation: floatDiamond 6s infinite ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes floatDiamond {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Collections Premium */
+        .collections {
+            padding: 150px 5%;
+            background: #000;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 80px;
+            letter-spacing: 6px;
+            font-weight: 300;
+            color: var(--soft-white);
+            position: relative;
+            animation: titleReveal 1s ease;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .collection-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 600px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transform-style: preserve-3d;
+            transition: all 0.5s;
+        }
+
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .collection-card:hover::before {
+            opacity: 1;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px) rotateX(2deg);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.3);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+            filter: brightness(0.8);
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.1);
+            filter: brightness(1);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            padding: 50px 40px;
+            color: white;
+            transform: translateY(20px);
+            transition: all 0.5s;
+            z-index: 2;
+        }
+
+        .collection-card:hover .collection-overlay {
+            transform: translateY(0);
+        }
+
+        .collection-overlay h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .collection-overlay p {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            font-family: 'Arial', sans-serif;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        /* Featured Products 3D */
+        .featured-products {
+            background: linear-gradient(180deg, #000, #0a0a0a);
+            padding: 150px 5%;
+            position: relative;
+        }
+
+        .products-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 50px;
+            margin-top: 80px;
+            perspective: 1000px;
+        }
+
+        .product-card {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s;
+            transform-style: preserve-3d;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(212, 175, 55, 0.05));
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(183, 110, 121, 0.1));
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            color: var(--soft-white);
+            font-weight: 300;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 400;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Brand Story Parallax */
+        .brand-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image {
+            background: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1000') center/cover;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .story-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.7));
+        }
+
+        .story-content {
+            padding: 120px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #000;
+            color: var(--soft-white);
+            position: relative;
+        }
+
+        .story-content::before {
+            content: '"';
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            font-size: 150px;
+            color: var(--gold);
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        .story-content h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+            font-weight: 300;
+            background: linear-gradient(135deg, var(--soft-white), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 25px;
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Trust Indicators Animated */
+        .trust-section {
+            padding: 120px 5%;
+            background: #000;
+            position: relative;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-item {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trust-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--gold), var(--rose-gold));
+            z-index: -1;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .trust-item:hover::before {
+            opacity: 1;
+        }
+
+        .trust-item:hover {
+            transform: translateY(-10px);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .trust-icon {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .trust-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+            color: var(--soft-white);
+            font-weight: 300;
+        }
+
+        .trust-item p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Newsletter Luxo */
+        .newsletter {
+            background: linear-gradient(135deg, #000, #0a0a0a);
+            color: var(--soft-white);
+            padding: 120px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .newsletter h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+
+        .newsletter p {
+            margin-bottom: 50px;
+            font-size: 1.15rem;
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 20px 30px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--soft-white);
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .newsletter-form button {
+            background: var(--gold);
+            color: #000;
+            padding: 20px 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-form button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--dark-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+        }
+
+        .newsletter-form button:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Footer Premium */
+        footer {
+            background: #000;
+            color: var(--light-gray);
+            padding: 80px 5% 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 60px;
+            max-width: 1600px;
+            margin: 0 auto 50px;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-5px) rotate(360deg);
+            border-color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            font-size: 0.9rem;
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 4rem;
+            }
+
+            .brand-story {
+                grid-template-columns: 1fr;
+            }
+
+            .story-content {
+                padding: 80px 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+                letter-spacing: 4px;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="particles">
+        <div class="particle" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 30%; left: 80%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 50%; left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="top: 70%; left: 30%; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 20%; left: 60%; animation-delay: 3s;"></div>
+        <div class="particle" style="top: 80%; left: 70%; animation-delay: 5s;"></div>
+    </div>
+
+    <header>
+        <div class="promo-bar">
+            COLEÇÃO EXCLUSIVA 2025 • FRETE GRÁTIS ACIMA DE R$ 299 • PARCELAMENTO SEM JUROS
+        </div>
+        <nav>
+            <a href="#" class="logo">BIJURELLA</a>
+            <ul class="nav-links">
+                <li><a href="#colecoes">COLEÇÕES</a></li>
+                <li><a href="#novidades">LANÇAMENTOS</a></li>
+                <li><a href="#sobre">MAISON</a></li>
+                <li><a href="#contato">ATELIER</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button title="Buscar">🔍</button>
+                <button title="Conta">👤</button>
+                <button title="Carrinho">🛍️</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="floating-diamond">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10 L90 40 L50 90 L10 40 Z" stroke="url(#gold-gradient)" stroke-width="2" fill="rgba(212, 175, 55, 0.1)"/>
+                <defs>
+                    <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#B76E79;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <div class="hero-content">
+            <h1>HAUTE JOAILLERIE</h1>
+            <p>Onde a arte encontra a eternidade</p>
+            <a href="#colecoes" class="cta-button">EXPLORAR COLEÇÃO</a>
+        </div>
+    </section>
+
+    <section class="collections reveal" id="colecoes">
+        <h2 class="section-title">COLEÇÕES EXCLUSIVAS</h2>
+        <div class="collection-grid">
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800" alt="Colares Elegantes">
+                <div class="collection-overlay">
+                    <h3>COLARES</h3>
+                    <p>Peças atemporais de alta joalheria</p>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800" alt="Anéis Sofisticados">
+                <div class="collection-overlay">
+                    <h3>ANÉIS</h3>
+                    <p>Símbolos eternos de compromisso e elegância</p>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800" alt="Brincos Delicados">
+                <div class="collection-overlay">
+                    <h3>BRINCOS</h3>
+                    <p>Sofisticação em cada detalhe</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products reveal" id="novidades">
+        <div class="products-container">
+            <h2 class="section-title">LANÇAMENTOS EXCLUSIVOS</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h3 class="product-name">Colar Celestial</h3>
+                    <p class="product-price">R$ 1.890,00</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h3 class="product-name">Anel Diamante Éternel</h3>
+                    <p class="product-price">R$ 2.450,00</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h3 class="product-name">Brinco Lumière</h3>
+                    <p class="product-price">R$ 1.590,00</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h3 class="product-name">Pulseira Infinity</h3>
+                    <p class="product-price">R$ 1.290,00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="brand-story reveal" id="sobre">
+        <div class="story-image"></div>
+        <div class="story-content">
+            <h2>NOSSA MAISON</h2>
+            <p>Desde nossa fundação, dedicamos cada dia à criação de peças que transcendem o tempo. Nossa expertise em alta joalheria é transmitida através de gerações de artesãos mestres.</p>
+            <p>Cada joia Bijurella é uma obra-prima única, criada com materiais nobres e técnicas centenárias, unindo tradição e inovação em perfeita harmonia.</p>
+            <p>Acreditamos que uma joia não é apenas um acessório, mas uma extensão da alma de quem a usa — uma narrativa pessoal esculpida em ouro e pedras preciosas.</p>
+        </div>
+    </section>
+
+    <section class="trust-section reveal">
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-icon">💎</div>
+                <h3>CERTIFICADO DE AUTENTICIDADE</h3>
+                <p>Todas as peças acompanham certificado internacional de qualidade e autenticidade</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🚚</div>
+                <h3>ENTREGA PREMIUM</h3>
+                <p>Frete grátis para todo Brasil com embalagem de luxo e seguro completo</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⚜️</div>
+                <h3>GARANTIA VITALÍCIA</h3>
+                <p>Cobertura completa e manutenção gratuita por toda vida útil da joia</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">💳</div>
+                <h3>PARCELAMENTO EXCLUSIVO</h3>
+                <p>Até 10x sem juros em peças selecionadas com condições especiais</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter reveal">
+        <h2>CÍRCULO BIJURELLA</h2>
+        <p>Receba acesso antecipado às coleções exclusivas e benefícios VIP</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Seu e-mail exclusivo" required>
+            <button type="submit">INGRESSAR</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BIJURELLA</h3>
+                <p>Haute Joaillerie desde 2015</p>
+                <p style="margin-top: 20px; opacity: 0.7; font-size: 0.9rem;">Criando legados em ouro e pedras preciosas</p>
+                <div class="social-icons">
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Pinterest">📌</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>CLIENTE</h3>
+                <ul>
+                    <li><a href="#">Atendimento Personalizado</a></li>
+                    <li><a href="#">Agendar Visita ao Atelier</a></li>
+                    <li><a href="#">Rastreamento de Pedidos</a></li>
+                    <li><a href="#">Política de Trocas</a></li>
+                    <li><a href="#">Guia de Tamanhos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>MAISON</h3>
+                <ul>
+                    <li><a href="#">Nossa História</a></li>
+                    <li><a href="#">Processo Artesanal</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                    <li><a href="#">Certificações</a></li>
+                    <li><a href="#">Imprensa</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>ATELIER</h3>
+                <ul>
+                    <li>📧 boutique@bijurella.com.br</li>
+                    <li>📱 +55 11 3456-7890</li>
+                    <li>⏰ Segunda a Sábado</li>
+                    <li style="margin-left: 25px;">10h às 19h</li>
+                    <li style="margin-top: 15px;">📍 Jardins, São Paulo - SP</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Bijurella Haute Joaillerie. Todos os direitos reservados. | CNPJ: 00.000.000/0001-00</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">Formas de Pagamento: Visa • Mastercard • Amex • Elo • PIX</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cursor Customizado asas
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header Hide on Scroll Down
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
